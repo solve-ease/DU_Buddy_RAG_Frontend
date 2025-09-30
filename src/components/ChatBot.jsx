@@ -12,7 +12,7 @@ const ChatBot = () => {
   const messagesEndRef = useRef(null);
   
   // WebSocket configuration - update this URL with your backend WebSocket endpoint
-  const WEBSOCKET_URL = 'wss://voiceagent.solveease-rogue.tech/ws/chat';
+  const WEBSOCKET_URL = 'ws://localhost:8000/ws/chat';
   
   useEffect(() => {
     // Cleanup on unmount
@@ -55,6 +55,9 @@ const ChatBot = () => {
     let messageText;
     if (typeof data === 'string') {
       messageText = data;
+    } else if (data.text) {
+      // Extract the text field from the backend response
+      messageText = data.text;
     } else if (data.message) {
       messageText = data.message;
     } else if (data.response) {
@@ -64,9 +67,9 @@ const ChatBot = () => {
     }
     
     setMessages(prev => [...prev, {
-      id: Date.now(),
+      id: data.id || Date.now(), // Use the id from backend if available
       text: messageText,
-      sender: 'bot'
+      sender: data.sender || 'bot' // Use the sender from backend if available
     }]);
   };
   

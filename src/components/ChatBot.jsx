@@ -12,7 +12,7 @@ const ChatBot = () => {
   const messagesEndRef = useRef(null);
   
   // WebSocket configuration - update this URL with your backend WebSocket endpoint
-  const WEBSOCKET_URL = 'wss://voiceagent.solveease-rogue.tech/api2/ws/chat';
+  const WEBSOCKET_URL = 'wss://solveease-rogue.tech/du_buddy_rag/ws/chat';
   
   useEffect(() => {
     // Cleanup on unmount
